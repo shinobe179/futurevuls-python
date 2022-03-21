@@ -1,9 +1,6 @@
-import json
 import logging
-from unittest import result
 
 import requests
-from aiohttp import Payload
 
 logger = logging.getLogger(__name__)
 formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(filename)s - %(funcName)s - %(lineno)d - "%(message)s"')
