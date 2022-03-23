@@ -13,7 +13,7 @@ URL = 'https://rest.vuls.biz'
 
 class FutureVulsAPIClient:
 
-    def __init__(self, token, debug=False):
+    def __init__(self, token=None, debug=False):
         self.set_token(token)
         if debug is True:
             logger.setLevel(logging.DEBUG)
