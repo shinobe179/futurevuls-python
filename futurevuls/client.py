@@ -41,18 +41,15 @@ class FutureVulsAPIClient:
 
         Returns
         -----------
-        is_health : bool
-            Whether FutureVuls is health or not.
+        result : dict
+            Status code and response body.
         """
 
         resp = requests.get(URL + '/health')
-        logger.debug('status_code: %s', resp.status_code)
+        logger.debug('status_code: %s, response_body: %s', resp.status_code, resp.json())
+        result = {'status_code': resp.status_code, 'response_body': resp.json()}
 
-        is_health = False
-        if resp.status_code == 200:
-            is_health = True
-
-        return is_health
+        return result
 
     def get_cve(self, cve_id):
         """
@@ -65,12 +62,12 @@ class FutureVulsAPIClient:
 
         Returns
         -----------
-        cve : dict
-            CVE information you specified.
+        result : dict
+            Status code and response body.
         """
         resp = requests.get(URL + f'/v1/cve/{cve_id}', headers=self.headers)
-        logger.debug('cve_id: %s, status_code, %s, response: %s', cve_id, resp.status_code, resp)
-        result = {'status_code': resp.status_code, 'response': resp.json()}
+        logger.debug('cve_id: %s, status_code, %s, response_body: %s', cve_id, resp.status_code, resp)
+        result = {'status_code': resp.status_code, 'response_body': resp.json()}
 
         return result
 
@@ -100,7 +97,7 @@ class FutureVulsAPIClient:
         Returns
         -----------
         result : dict
-            Response body.
+            Status code and response body.
         """
         params = {
            'page': page,
@@ -113,8 +110,8 @@ class FutureVulsAPIClient:
         }
 
         resp = requests.get(URL + '/v1/cves', headers=self.headers, params=params)
-        logger.debug('params: %s, status_code, %s, response: %s', params, resp.status_code, resp)
-        result = {'status_code': resp.status_code, 'response': resp.json()}
+        logger.debug('params: %s, status_code, %s, response_body: %s', params, resp.status_code, resp)
+        result = {'status_code': resp.status_code, 'response_body': resp.json()}
 
         return result
 
@@ -129,12 +126,12 @@ class FutureVulsAPIClient:
 
         Returns
         -----------
-        resp : dict
-            Response body.
+        result : dict
+            Status code and response body.
         """
         resp = requests.post(URL + '/v1/server/paste', headers=self.headers, json=body)
-        logger.debug('cve_id: %s, status_code, %s, response: %s', body, resp.status_code, resp)
-        result = {'status_code': resp.status_code, 'response': resp.json()}
+        logger.debug('cve_id: %s, status_code, %s, response_body: %s', body, resp.status_code, resp)
+        result = {'status_code': resp.status_code, 'response_body': resp.json()}
 
         return result
 
@@ -150,11 +147,11 @@ class FutureVulsAPIClient:
         Returns
         -----------
         result : dict
-            Response body.
+            Status code and response body.
         """
         resp = requests.get(URL + f'/v1/server/uuid/{server_uuid}', headers=self.headers)
-        logger.debug('server_uuid: %s, status_code: %s, response: %s', server_uuid, resp.status_code, resp)
-        result = {'status_code': resp.status_code, 'response': resp.json()}
+        logger.debug('server_uuid: %s, status_code: %s, response_body: %s', server_uuid, resp.status_code, resp)
+        result = {'status_code': resp.status_code, 'response_body': resp.json()}
 
         return result
 
@@ -170,11 +167,11 @@ class FutureVulsAPIClient:
         Returns
         -----------
         result : dict
-            Response body.
+            Status code and response body.
         """
         resp = requests.get(URL + f'/v1/server/{server_id}', headers=self.headers)
-        logger.debug('server_id: %s, status_code: %s, response: %s', server_id, resp.status_code, resp)
-        result = {'status_code': resp.status_code, 'response': resp.json()}
+        logger.debug('server_id: %s, status_code: %s, response_body: %s', server_id, resp.status_code, resp)
+        result = {'status_code': resp.status_code, 'response_body': resp.json()}
 
         return result
 
@@ -189,12 +186,12 @@ class FutureVulsAPIClient:
 
         Returns
         -----------
-        result : bool
-            Whether the deletion is suceeded.
+        result : dict
+            Status code and response body.
         """
         resp = requests.delete(URL + f'/v1/server/{server_id}', headers=self.headers)
         logger.debug('server_id: %s, status_code: %s', server_id, resp.status_code)
-        result = resp.ok
+        result = {'status_code': resp.status_code, 'response_body': resp.json()}
 
         return result
 
@@ -220,7 +217,7 @@ class FutureVulsAPIClient:
         Returns
         -----------
         result : dict
-            Response body.
+            Status code and response body.
         """
         params = {
            'page': page,
@@ -231,7 +228,7 @@ class FutureVulsAPIClient:
         }
 
         resp = requests.get(URL + '/v1/servers', headers=self.headers, params=params)
-        logger.debug('params: %s, status_code: %s, response: %s', params, resp.status_code, resp.json())
-        result = {'status_code': resp.status_code, 'response': resp.json()}
+        logger.debug('params: %s, status_code: %s, response_body: %s', params, resp.status_code, resp.json())
+        result = {'status_code': resp.status_code, 'response_body': resp.json()}
 
         return result
